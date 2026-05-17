@@ -1,6 +1,7 @@
 const STORAGE_KEY = "plants";
 let collection = [];
 
+//Collect input from New Plant Submission
 function getPlantFormValues() {
     return {
         type: document.getElementById("plantType").value.trim(),
@@ -11,7 +12,7 @@ function getPlantFormValues() {
         imageFile: document.getElementById("firstImg").files[0] || null
     };
 }
-
+//Reset input fields after submission
 function resetPlantForm() {
     document.getElementById("plantType").value = "";
     document.getElementById("plantName").value = "";
@@ -20,11 +21,11 @@ function resetPlantForm() {
     document.getElementById("plantBirth").value = "";
     document.getElementById("firstImg").value = null;
 }
-
+//Save locally
 function savePlants() {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(collection));
 }
-
+//Create object that saves input values
 function createPlantObject(formValues, imageData) {
     return {
         type: formValues.type,
@@ -36,7 +37,7 @@ function createPlantObject(formValues, imageData) {
         logs: []
     };
 }
-
+//Adds plant to the collection with given saved inputs
 function addPlant() {
     const formValues = getPlantFormValues();
     const reader = new FileReader();
@@ -46,7 +47,7 @@ function addPlant() {
         savePlants();
         displayPlants();
         resetPlantForm();
-        // redirect back to garden as confirmation
+ //Redirect to plant collection after submission
         window.location.href = "garden.html";
     };
 
@@ -60,12 +61,12 @@ function addPlant() {
         window.location.href = "garden.html";
     }
 }
-
+//Loads plants on the collection page
 function loadPlants() {
     const savedPlants = localStorage.getItem(STORAGE_KEY);
     collection = savedPlants ? JSON.parse(savedPlants) : [];
 }
-
+//Displays the plants on the collection page
 function displayPlants() {
     const noPlant = document.getElementById("noPlants");
     const plantList = document.getElementById("plantList");
@@ -75,12 +76,12 @@ function displayPlants() {
     }
 
     plantList.innerHTML = "";
-
+//If there are no plants - show that the user needs to add their first plant
     if (collection.length === 0) {
         noPlant.style.display = "block";
         return;
     }
-
+//If there are plants to show, show list of plants
     noPlant.style.display = "none";
 
     collection.forEach((plant, index) => {
@@ -99,12 +100,12 @@ function displayPlants() {
 
     attachPlantListHandlers();
 }
-
+//Plant card interaction 
 function attachPlantListHandlers() {
     const plantList = document.getElementById('plantList');
     if (!plantList) return;
 
-    // delegate clicks: open log on card click, remove on remove button
+//Removes selected plant or opens selected plant details
     plantList.onclick = function (e) {
         const removeBtn = e.target.closest('.remove-btn');
         if (removeBtn) {
@@ -121,14 +122,14 @@ function attachPlantListHandlers() {
         }
     };
 }
-
+//Removes plant from array
 function removePlant(index) {
     collection.splice(index, 1);
     savePlants();
     displayPlants();
 }
 
-// Modal for plant log
+//PlantCard Edit Options
 function ensureLogModal() {
     if (document.getElementById('plantLogModal')) return;
 
@@ -164,14 +165,14 @@ function ensureLogModal() {
     `;
     document.body.appendChild(modal);
 
-    // handlers
+  
     modal.querySelector('.modal-close').addEventListener('click', closePlantLog);
     modal.addEventListener('click', (e) => { if (e.target === modal) closePlantLog(); });
     modal.querySelector('#logForm').addEventListener('submit', handleLogSubmit);
 }
 
 let currentLogIndex = null;
-
+//Opens plant log
 function openPlantLog(index) {
     ensureLogModal();
     currentLogIndex = index;
