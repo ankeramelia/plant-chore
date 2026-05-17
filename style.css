@@ -159,6 +159,13 @@ button:active {
     margin-top: 16px;
 }
 
+.input-error {
+    color: #a42d2d;
+    font-size: 0.95rem;
+    margin: 4px 0 10px;
+    min-height: 1.2em;
+}
+
 /* New-plant inputs: green border with white typing area and handwritten placeholders */
 #newInputs input,
 #newInputs select,

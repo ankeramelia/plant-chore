@@ -41,6 +41,28 @@ function createPlantObject(formValues, imageData) {
 function addPlant() {
     const formValues = getPlantFormValues();
     const reader = new FileReader();
+    const birthdayInput = document.getElementById('plantBirth');
+    const birthdayError = document.getElementById('birthdayError');
+
+    if (formValues.birthday) {
+        const birthdayDate = new Date(formValues.birthday);
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        if (birthdayDate > today) {
+            if (birthdayError) {
+                birthdayError.textContent = 'Birthday cannot be in the future.';
+            }
+            if (birthdayInput) {
+                birthdayInput.focus();
+            }
+            return;
+        }
+    }
+
+    if (birthdayError) {
+        birthdayError.textContent = '';
+    }
 
     reader.onload = () => {
         collection.push(createPlantObject(formValues, reader.result));
@@ -248,6 +270,10 @@ function handleLogSubmit(e) {
 }
 //Loads data on page load
 window.addEventListener('load', () => {
+    const birthdayInput = document.getElementById('plantBirth');
+    if (birthdayInput) {
+        birthdayInput.max = new Date().toISOString().split('T')[0];
+    }
     loadPlants();
     displayPlants();
 });
