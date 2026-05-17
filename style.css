@@ -68,7 +68,7 @@ button {
     transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
 }
 
-/* Keep home screen buttons on a single line when possible */
+/* Keep home screen buttons on a single line*/
 .home .buttons button {
     white-space: nowrap;
     width: auto;
@@ -76,7 +76,7 @@ button {
     max-width: 92vw;
 }
 
-/* Remove underline on anchors (especially those wrapping buttons) */
+/* Remove underline on anchors*/
 a, a:link, a:visited {
     text-decoration: none;
 }
