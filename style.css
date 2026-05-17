@@ -19,9 +19,76 @@ body {
 
 .home h1 {
     font-family: 'Indie Flower', cursive;
-    font-size: 150px;
+    font-size: clamp(48px, 12vw, 170px);
     color: #2e5d3a;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
+    text-shadow: 0 6px 12px rgba(46, 93, 58, 0.18);
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 0.2em solid rgba(238, 255, 231, 0.9);
+    animation:
+        typing 4s steps(20, end) forwards,
+        blink 0.75s step-end infinite;
+    max-width: 95vw;
+}
+
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+@keyframes blink {
+    50% { border-color: transparent; }
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+button {
+    width: min(320px, 85%);
+    max-width: 90vw;
+    padding: clamp(10px, 2.5vw, 22px) clamp(12px, 3vw, 28px);
+    border: none;
+    border-radius: 18px;
+    background: linear-gradient(145deg, #5ba06d 0%, #3e7d52 100%);
+    color: #f8ffe7;
+    font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    text-transform: none;
+    cursor: pointer;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.18), inset 0 0 0 0 rgba(255,255,255,0.2);
+    transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+}
+
+/* Keep home screen buttons on a single line when possible */
+.home .buttons button {
+    white-space: nowrap;
+    width: auto;
+    min-width: 200px;
+    max-width: 92vw;
+}
+
+/* Remove underline on anchors (especially those wrapping buttons) */
+a, a:link, a:visited {
+    text-decoration: none;
+}
+
+button:hover {
+    transform: scale(1.05);
+    background: linear-gradient(145deg, #7bd989 0%, #4fa06a 50%, #2e6c45 100%);
+    box-shadow: 0 18px 36px rgba(0, 0, 0, 0.28), inset 0 0 25px rgba(255,255,255,0.15);
+}
+
+button:active {
+    transform: scale(0.98);
 }
 
 .background {
@@ -45,23 +112,30 @@ body {
     justify-content: center;
 }
 
-button {
-    padding: 10px 15px;
-    border: none;
-    border-radius: 8px;
-    background-color: #4c7a5d;
-    color: white;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #3e664d;
-}
-
 .new {
     text-align: center;
     padding: 20px;
     color: #2e5d3a;
+}
+
+.new-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    margin: 24px auto 0;
+    width: min(320px, 85%);
+}
+
+.new-actions a {
+    display: block;
+    width: 100%;
+}
+
+.new-actions button {
+    width: 100%;
+    white-space: nowrap;
+    text-align: center;
 }
 
 .new h1{
@@ -72,19 +146,54 @@ button:hover {
 #newInputs {
     display: flex;
     flex-direction: column;
-    max-width: 400px;
+    max-width: 420px;
     margin: 0 auto;
-    gap: 20px;
+    gap: 18px;
 }
 
 #addPlant {
     margin-top: 40px;
 }
 
-input, select {
-    padding: 10px;
-    border-radius: 8px;
-    border: 1px solid #cdd9cd;
+#collectionPageBtn {
+    margin-top: 16px;
+}
+
+/* New-plant inputs: green border with white typing area and handwritten placeholders */
+#newInputs input,
+#newInputs select,
+#newInputs input[type="file"] {
+    background: #ffffff;
+    color: #0b2b18;
+    padding: 12px 14px;
+    border-radius: 12px;
+    border: 3px solid var(--accent, #5ba06d);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.12), inset 0 2px 6px rgba(0,0,0,0.03);
+    font-size: 1rem;
+    font-weight: 600;
+    outline: none;
+}
+
+#newInputs input:focus,
+#newInputs select:focus,
+#newInputs input[type="file"]:focus {
+    box-shadow: 0 10px 30px rgba(0,0,0,0.18), 0 0 8px rgba(126,252,107,0.12) inset;
+    border-color: var(--accent-2, #2ec4b6);
+}
+
+/* Handwritten placeholders */
+#newInputs input::placeholder,
+#newInputs select::placeholder {
+    font-family: 'Indie Flower', cursive;
+    color: #8aae90;
+    opacity: 1;
+    font-size: 1.05rem;
+}
+
+/* Darker labels for readability */
+#newInputs label {
+    color: #08321c;
+    font-weight: 700;
 }
 
 .garden {
@@ -100,30 +209,72 @@ input, select {
     color: #2e5d3a;
 }
 
-#plantList {
+.bottom-action {
     display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
     justify-content: center;
+    align-items: center;
+    margin: 80px auto 12px;
+    width: min(320px, 85%);
+    max-width: 90vw;
+}
+
+.bottom-action a {
+    display: inline-flex;
+    width: 100%;
+}
+
+.bottom-action button {
+    width: 100%;
+    white-space: nowrap;
+    text-align: center;
+}
+
+/* Responsive grid for plant cards */
+#plantList {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 260px));
+    gap: 18px;
+    align-items: start;
+    justify-content: center;
+    justify-items: center;
     margin-top: 40px;
+    width: 100%;
+    padding: 0 12px;
 }
 
 .plantCard {
     background-color: white;
-    padding: 15px;
+    padding: 12px;
     border-radius: 12px;
-    width: 200px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     text-align: center;
+    width: 100%;
+    max-width: 260px;
+    box-sizing: border-box;
 }
 
 .plantCard img {
     width: 100%;
-    height: 150px;
+    height: auto;
+    aspect-ratio: 4 / 3;
     object-fit: cover;
     border-radius: 10px;
     margin-bottom: 10px;
 }
+
+.plantCard button {
+    width: auto;
+    padding: 8px 10px;
+    font-size: 0.95rem;
+    border-radius: 8px;
+    background: linear-gradient(145deg, #6bb57b 0%, #3e7d52 100%);
+    color: #fff;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.12);
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
 
 #noPlants {
     text-align: center;
@@ -136,3 +287,111 @@ input, select {
     top: 15px;
     left: 15px;
 }
+
+/* Place home/back buttons inline on the new-plant page to avoid overlapping the title */
+.new #homeBtn, .new #backBtn {
+    position: static;
+    display: block;
+    margin: 8px 0 18px 15px;
+    left: auto;
+    top: auto;
+    width: auto;
+}
+
+@media (max-width: 480px) {
+    .home {
+        align-items: flex-start;
+        padding-top: 24px;
+    }
+
+    .home h1 {
+        font-size: clamp(36px, 14vw, 120px);
+        border-right-width: 0.15em;
+    }
+
+    button {
+        width: 90%;
+        padding: 12px 14px;
+        font-size: 1rem;
+    }
+
+    .plantCard {
+        padding: 10px;
+    }
+
+    /* Allow wrapping on very small screens to avoid overflow */
+    .home .buttons button {
+        white-space: normal;
+        min-width: 0;
+        width: 90%;
+    }
+}
+
+/* Modal styles for plant log */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    display: none; /* toggled to flex when opened */
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    padding: 18px; /* keep spacing on small screens */
+}
+
+.modal {
+    background: #fff;
+    color: #08321c;
+    border-radius: 12px;
+    padding: 18px 20px;
+    width: min(720px, 94vw);
+    max-height: 90vh;
+    overflow: auto;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+    position: relative;
+}
+
+.modal-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 36px;
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(145deg, #5ba06d 0%, #3e7d52 100%);
+    color: #f8ffe7;
+    border: none;
+    border-radius: 50%;
+    font-size: 18px;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.18);
+}
+
+.modal-close:focus {
+    outline: 2px solid 2e5d3a;
+}
+
+.modal-header {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+#logPlantImage {
+    width: 72px;
+    height: 72px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 2px solid #e6f9ea;
+}
+
+#logEntries { margin: 12px 0 18px 0; }
+.log-entry { padding: 10px; border-bottom: 1px solid #eee; }
+.log-photo { max-width: 160px; display: block; margin-top: 8px; border-radius: 6px; }
+
+.modal form { display: grid; gap: 8px; }
+.modal form input[type="text"], .modal form input[type="date"], .modal form select { padding: 8px; }
+.modal form button { padding: 10px; border-radius: 8px; }
