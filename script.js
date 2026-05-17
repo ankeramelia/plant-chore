@@ -164,7 +164,7 @@ function ensureLogModal() {
         </div>
     `;
     document.body.appendChild(modal);
-
+// Insert above into HTML
   
     modal.querySelector('.modal-close').addEventListener('click', closePlantLog);
     modal.addEventListener('click', (e) => { if (e.target === modal) closePlantLog(); });
@@ -184,18 +184,18 @@ function openPlantLog(index) {
     imgEl.src = plant.image || '';
     renderLogEntries();
 }
-
+//Close plant log
 function closePlantLog() {
     const modal = document.getElementById('plantLogModal');
     if (modal) modal.style.display = 'none';
     currentLogIndex = null;
 }
 
-// close modal on Escape
+// close modal with ESC
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closePlantLog();
 });
-
+//Prints log entries
 function renderLogEntries() {
     const container = document.getElementById('logEntries');
     container.innerHTML = '';
@@ -221,14 +221,14 @@ function renderLogEntries() {
         container.appendChild(div);
     });
 }
-
+//Submit log entires
 function handleLogSubmit(e) {
     e.preventDefault();
     const type = document.getElementById('logType').value;
     const date = document.getElementById('logDate').value;
     const notes = document.getElementById('logNotes').value.trim();
     const file = document.getElementById('logPhoto').files[0];
-
+//Saves new photo updates
     function saveEntry(photoData) {
         const entry = { type, date, notes, photo: photoData || null };
         collection[currentLogIndex].logs = collection[currentLogIndex].logs || [];
@@ -237,7 +237,7 @@ function handleLogSubmit(e) {
         renderLogEntries();
         document.getElementById('logForm').reset();
     }
-
+//Saves plant updates
     if (file) {
         const reader = new FileReader();
         reader.onload = () => saveEntry(reader.result);
@@ -246,7 +246,7 @@ function handleLogSubmit(e) {
         saveEntry(null);
     }
 }
-
+//Loads data on page load
 window.addEventListener('load', () => {
     loadPlants();
     displayPlants();
