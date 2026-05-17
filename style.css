@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f3f7f3;
+}
+
+.home {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.home-container {
+    text-align: center;
+}
+
+.home h1 {
+    font-family: 'Indie Flower', cursive;
+    font-size: 150px;
+    color: #2e5d3a;
+    margin-bottom: 20px;
+}
+
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.background img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    background-color: #4c7a5d;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #3e664d;
+}
+
+.new {
+    text-align: center;
+    padding: 20px;
+    color: #2e5d3a;
+}
+
+.new h1{
+    font-family: 'Indie Flower', cursive;
+    font-size: 50px;
+}
+
+#newInputs {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    margin: 0 auto;
+    gap: 20px;
+}
+
+#addPlant {
+    margin-top: 40px;
+}
+
+input, select {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #cdd9cd;
+}
+
+.garden {
+    position: relative;
+    padding-top: 80px;
+}
+
+.garden h1 {
+    font-size: 50px;
+    text-align: center;
+    font-family: 'Indie Flower', cursive;
+    margin-top: 20px;
+    color: #2e5d3a;
+}
+
+#plantList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.plantCard {
+    background-color: white;
+    padding: 15px;
+    border-radius: 12px;
+    width: 200px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.plantCard img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+#noPlants {
+    text-align: center;
+    margin-top: 40px;
+    color: #5c7a5f;
+}
+
+#homeBtn, #backBtn {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+}

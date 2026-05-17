@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <title>New Plant!</title>
+</head>
+<body class="new">
+
+    <a href="index.html"><button title="Home screen" id="homeBtn">Back home</button></a>
+    <h1>Yay! Expanding the family</h1>
+    <p>Please add your new plant's details below</p>
+
+    <div id="newInputs">
+
+        <label for="plantType">Type of plant</label>
+        <input title="What type of plant are we adding?" id="plantType" placeholder="Philodendron" type="text" required>
+
+        <label for="plantName">Name of plant</label>
+        <input title="Name your new leafy friend" id="plantName" placeholder="Gabby" type="text" required>
+
+        <label for="growingMed">Substrate</label>
+        <input title="Growing medium" id="growingMed" placeholder="LECA" type="text">
+
+        <label for="waterType">Watering needs</label>
+        <select title="Thirsty meter" id="waterType" name="Watering Needs">
+            <option value="monthly">Monthly</option>
+            <option value="fortnightly">Fortnightly</option>
+            <option value="weekly">Weekly</option>
+            <option value="daily">Daily</option>
+        </select>
+
+        <label for="plantBirth">Birthday</label>
+        <input title="Date of the plant entering your collection" id="plantBirth" type="date">
+
+        <label for="firstImg">First image</label>
+        <input id="firstImg" title="First image!" type="file">
+
+    </div>
+
+    <button onclick="addPlant()" title="Time to add!" id="addPlant">Add to garden</button>
+
+    <div class="background">
+            <img src="assets/background new.svg" alt="background">
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
